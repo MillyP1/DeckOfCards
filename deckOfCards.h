@@ -18,7 +18,7 @@ class Card
 
         Card (VALUE, SUIT);
 
-        void printCard () const;
+        virtual void printCard () const;
         void setValue (VALUE);
         void setSuit (SUIT);
         VALUE getValue () const;
@@ -29,7 +29,7 @@ class Card
 class Deck : public Card
 {
     private:
-        Card m_deck [52];
+        std::vector <Card> m_deck;
         int m_currentCard;
 
     public:
