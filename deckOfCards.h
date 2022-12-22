@@ -36,7 +36,6 @@ class Deck : public Card
         void printDeck () const;
         void shuffle ();
         void sortNew ();
-        void deal (int numToDeal);
 
 };
 
