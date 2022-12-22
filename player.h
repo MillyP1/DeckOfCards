@@ -12,7 +12,6 @@ class Player
 
     public:
         Player ();
-        void addToHand(Card cardDealt);
 };
 
 #endif
