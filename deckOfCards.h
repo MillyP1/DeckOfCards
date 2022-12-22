@@ -16,14 +16,13 @@ class Card
 
     public:
 
-        Card (VALUE, SUIT);
+        Card (VALUE value = ACE, SUIT suit = SPADE);
 
         virtual void printCard () const;
         void setValue (VALUE);
         void setSuit (SUIT);
         VALUE getValue () const;
         SUIT getSuit () const;
-
 };
 
 class Deck : public Card
@@ -36,7 +35,8 @@ class Deck : public Card
         Deck ();
         void printDeck () const;
         void shuffle ();
-        Card deal ();
+        void sortNew ();
+        void deal (int numToDeal);
 
 };
 
