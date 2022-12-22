@@ -82,11 +82,3 @@ void Deck::sortNew ()
     }
 }
 
-void Deck::deal (int numToDeal)
-{
-    for (int i = 0; i < numToDeal; i++) {
-        // Player::addToHand(m_deck[m_deck.size()]);
-        m_deck.pop_back();
-        m_deck.shrink_to_fit();
-    }
-}
