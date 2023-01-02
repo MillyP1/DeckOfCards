@@ -5,74 +5,76 @@
 #include "randomNumberGenerator.h"
 #include "deckOfCards.h"
 #include "player.h"
-Card::Card (VALUE value, SUIT suit)
+Card::Card(VALUE value, SUIT suit)
 {
-    setValue (value);
-    setSuit (suit);
+    setValue(value);
+    setSuit(suit);
 }
 
+VALUE Card::getValue() const { return m_name; }
+SUIT Card::getSuit() const { return m_suit; }
 
-VALUE Card::getValue () const { return m_name; }
-SUIT Card::getSuit () const { return m_suit; }
-
-void Card::setValue (VALUE name)
+void Card::setValue(VALUE name)
 {
     m_name = name;
-    m_value = (int) name;
+    m_value = (int)name;
 }
-void Card::setSuit (SUIT suit) { m_suit = suit; }
+void Card::setSuit(SUIT suit) { m_suit = suit; }
 
-void Card::printCard () const
+void Card::printCard() const
 {
     std::string name = "";
     std::string suit = "";
-    if (getSuit () == SUIT::SPADE) { suit = "S"; }
-    if (getSuit () == SUIT::DIAMOND) { suit = "D"; }
-    if (getSuit () == SUIT::CLUB) { suit = "C"; }
-    if (getSuit () == SUIT::HEART) { suit = "H"; }
+    if (getSuit() == SUIT::SPADE) { suit = "S"; }
+    if (getSuit() == SUIT::DIAMOND) { suit = "D"; }
+    if (getSuit() == SUIT::CLUB) { suit = "C"; }
+    if (getSuit() == SUIT::HEART) { suit = "H"; }
 
-    if (getValue () == VALUE::ACE) { name = "A"; }
-    if (getValue () == VALUE::JACK) { name = "JK"; }
-    if (getValue () == VALUE::QUEEN) { name = "QN"; }
-    if (getValue () == VALUE::KING) { name = "KG"; }
+    if (getValue() == VALUE::ACE) { name = "A"; }
+    if (getValue() == VALUE::JACK) { name = "JK"; }
+    if (getValue() == VALUE::QUEEN) { name = "QN"; }
+    if (getValue() == VALUE::KING) { name = "KG"; }
 
     if (name == "") {
-        std::cout << std::right << std::setw (2) << m_value << " | "<< std::right << suit << "\n";
-    } else std::cout << std::right << std::setw (2) << name << " | " << suit << "\n";
+        std::cout << std::right << std::setw(2) << m_value << " | "<< std::right << suit << "\n";
+    } else std::cout << std::right << std::setw(2) << name << " | " << suit << "\n";
 }
 
-Deck::Deck ()
+Deck::Deck(int numOfDecks)
 {
-    for (int columns = (int)SUIT::SPADE; columns <= (int)SUIT::HEART; columns++) {
-        for (int rows = (int)VALUE::ACE; rows <= (int)VALUE::KING; rows++) {
-            Card c;
-            c.setValue ((VALUE)rows);
-            c.setSuit ((SUIT)columns);
-
-            int index = (13 * columns) + rows - 1;
-            m_deck.push_back (c);
+    setNumOfDecks(numOfDecks);
+    int deckSize = 52 * m_numOfDecks;
+    Card tempArray [deckSize];
+    m_deck.reserve(deckSize);
+    for (int i = 0; i < m_numOfDecks; i++) {
+        for (int columns = (int)SUIT::SPADE; columns <= (int)SUIT::HEART; columns++) {
+            for (int rows = (int)VALUE::ACE; rows <= (int)VALUE::KING; rows++) {
+                Card c;
+                c.setValue((VALUE)rows);
+                c.setSuit((SUIT)columns);
+                
+                m_deck.emplace_back(c);
+            }
         }
-    } m_deck.shrink_to_fit ();
+    } m_deck.shrink_to_fit();
 }
 
-void Deck::printDeck () const
+void Deck::printDeck() const
 {
-    for (int columns = (int)SUIT::SPADE; columns <= (int)SUIT::HEART; columns++) {
-        for (int rows = (int)VALUE::ACE; rows <= (int)VALUE::KING; rows++) {
-            int index = (13 * columns) + rows - 1;
-            m_deck[index].printCard ();
-        }
+    for (int i = 0; i < m_deck.size(); i++) {
+        std::cout << std::right << std::setw(3) << i + 1 << " - " << m_deck.size() << ": ";             // Debugging: Give index of the cards out of total cards in deck
+        m_deck[i].printCard();
     } std::cout << "Printed...";
 }
 
-void Deck::shuffle ()
+void Deck::shuffle()
 {
     std::random_device rd;
     std::default_random_engine rng { rd () };
-    std::shuffle (m_deck.begin(), m_deck.end(), rng);
+    std::shuffle(m_deck.begin(), m_deck.end(), rng);
 }
 
-void Deck::sortNew ()
+void Deck::sortNew()
 {
     for (int i = 0; i < m_deck.size(); i++) {
         for (int j = 0; j < m_deck.size(); j++) {
@@ -82,3 +84,24 @@ void Deck::sortNew ()
     }
 }
 
+<<<<<<< HEAD
+=======
+void Deck::cut() {
+    setCutCard();
+    if (m_cutCard == 0 || m_cutCard == (m_deck.size() - 1)) { return; }
+    for (int i = 0; i < m_cutCard; i++) {
+        std::rotate(m_deck.begin(), m_deck.begin() + 1, m_deck.end());
+    }
+}
+
+void Deck::setCutCard() {
+    m_cutCard = generate(0, (m_deck.size() - 1));
+    std::cout << m_cutCard << "\n";
+}
+
+void Deck::setNumOfDecks(int num) {
+    if (num < 1) num = 1;
+    if (num > 8) num = 8;
+    m_numOfDecks = num;
+}
+>>>>>>> a9d602c (Added funcionality to "place a cut card" and cutting the deck. In addition, small updates to code.)
