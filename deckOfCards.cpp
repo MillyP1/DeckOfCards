@@ -4,7 +4,6 @@
 #include <iomanip>
 #include "randomNumberGenerator.h"
 #include "deckOfCards.h"
-#include "player.h"
 Card::Card(VALUE value, SUIT suit)
 {
     setValue(value);
@@ -84,8 +83,6 @@ void Deck::sortNew()
     }
 }
 
-<<<<<<< HEAD
-=======
 void Deck::cut() {
     setCutCard();
     if (m_cutCard == 0 || m_cutCard == (m_deck.size() - 1)) { return; }
@@ -104,4 +101,3 @@ void Deck::setNumOfDecks(int num) {
     if (num > 8) num = 8;
     m_numOfDecks = num;
 }
->>>>>>> a9d602c (Added funcionality to "place a cut card" and cutting the deck. In addition, small updates to code.)

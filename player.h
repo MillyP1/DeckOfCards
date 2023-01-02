@@ -11,12 +11,8 @@ class Player
         
 
     public:
-<<<<<<< HEAD
-        Player ();
-=======
         Player();
         void addToHand(Card cardDealt);
->>>>>>> a9d602c (Added funcionality to "place a cut card" and cutting the deck. In addition, small updates to code.)
 };
 
 #endif

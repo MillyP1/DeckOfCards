@@ -34,13 +34,6 @@ class Deck : public Card
         int m_cutCard = 0;
 
     public:
-<<<<<<< HEAD
-        Deck ();
-        void printDeck () const;
-        void shuffle ();
-        void sortNew ();
-
-=======
         Deck(int numOfDecks = 1);
         void printDeck() const;
         void shuffle();
@@ -48,7 +41,6 @@ class Deck : public Card
         void cut();
         void setCutCard();
         void setNumOfDecks(int);
->>>>>>> a9d602c (Added funcionality to "place a cut card" and cutting the deck. In addition, small updates to code.)
 };
 
 #endif
